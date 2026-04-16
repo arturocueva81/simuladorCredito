@@ -9,6 +9,9 @@ function calcular() {
 
     // Mostrar resultado en pantalla
     document.getElementById("spnDisponible").textContent = "USD " + disponible.toFixed(2);
+
+    let capacidad = calcularCapacidadPago(disponible);
+    document.getElementById("spnCapacidadPago").textContent = "USD " + capacidad.toFixed(2);
 }
 
 // Evento del botón

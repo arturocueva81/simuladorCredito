@@ -23,7 +23,36 @@ function calcular() {
 
     let cuota = calcularCuotaMensual(total, plazo);
     document.getElementById("spnCuotaMensual").textContent = "USD " + cuota.toFixed(2);
+
+    let esAprobado = aprobarCredito(capacidad, cuota);
+    let componenteEstado = document.getElementById("spnEstadoCredito");
+
+    if (esAprobado) {
+        componenteEstado.textContent = "CREDITO APROBADO";
+        componenteEstado.style.color = "green";
+    } else {
+        componenteEstado.textContent = "CREDITO RECHAZADO";
+        componenteEstado.style.color = "red";
+    }
+}
+document.getElementById("btnCalcularCredito").onclick = calcular;
+
+function reiniciar() {
+    document.getElementById("txtIngresos").value = "";
+    document.getElementById("txtEgresos").value = "";
+    document.getElementById("txtMonto").value = "";
+    document.getElementById("txtPlazo").value = "";
+    document.getElementById("txtTasaInteres").value = "";
+
+    document.getElementById("spnDisponible").textContent = "";
+    document.getElementById("spnCapacidadPago").textContent = "";
+    document.getElementById("spnInteresPagar").textContent = "";
+    document.getElementById("spnTotalPrestamo").textContent = "";
+    document.getElementById("spnCuotaMensual").textContent = "";
+
+    let componenteEstado = document.getElementById("spnEstadoCredito");
+    componenteEstado.textContent = "ANALIZANDO...";
+    componenteEstado.style.color = "#2c3e50"; // Color original (gris oscuro/azul)
 }
 
-// Evento del botón
-document.getElementById("btnCalcularCredito").onclick = calcular;
+document.getElementById("btnReiniciar").onclick = reiniciar;

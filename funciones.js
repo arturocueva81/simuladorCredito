@@ -20,3 +20,8 @@ function calcularInteresSimple(monto, tasa, plazo) {
     let interes = plazo * monto * (tasa / 100);
     return interes;
 }
+
+function calcularTotalPagar(monto, interes) {
+    let total = monto + interes + 100;
+    return total;
+}

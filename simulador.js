@@ -6,12 +6,17 @@ function calcular() {
 
     // Llamar a la función calcularDisponible
     let disponible = calcularDisponible(ingresos, egresos);
-
-    // Mostrar resultado en pantalla
     document.getElementById("spnDisponible").textContent = "USD " + disponible.toFixed(2);
 
     let capacidad = calcularCapacidadPago(disponible);
     document.getElementById("spnCapacidadPago").textContent = "USD " + capacidad.toFixed(2);
+
+    let monto = parseInt(document.getElementById("txtMonto").value);
+    let plazo = parseInt(document.getElementById("txtPlazo").value);
+    let tasa = parseInt(document.getElementById("txtTasaInteres").value);
+
+    let interes = calcularInteresSimple(monto, tasa, plazo);
+    document.getElementById("spnInteresPagar").textContent = "USD " + interes.toFixed(2);
 }
 
 // Evento del botón

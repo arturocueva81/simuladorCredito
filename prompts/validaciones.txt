@@ -1,0 +1,27 @@
+PROMPT 1 (Validaciones básicas):
+Hola, ayúdame a crear las validaciones para mi simulador de crédito en JavaScript.
+Necesito que todos los campos sean obligatorios y que no dejen poner letras, solo números. 
+Los errores deben aparecer en color rojo debajo de cada casilla usando los campos <small> que ya tengo en mi HTML.
+
+PROMPT 2 (Reglas de negocio):
+Ahora agrega reglas más específicas. Por ejemplo:
+- Los ingresos y el monto deben ser mayores a 0.
+- El plazo debe ser un número entero (años completos) entre 1 y 30.
+- La tasa de interés no puede ser mayor a 100 ni menor a 0.
+Quiero que los mensajes digan exactamente qué está mal, por ejemplo: "El plazo debe estar entre 1 y 30 años".
+
+PROMPT 3 (Evento OnBlur):
+Quiero que las validaciones no esperen hasta el final. Haz que cuando el usuario termine de escribir en una casilla y pase a la siguiente (evento onblur), 
+se valide ese campo automáticamente y muestre el error si existe.
+
+PROMPT 4 (Validación de Botón):
+Haz una función llamada validarFormulario() que revise de nuevo todos los campos cuando se dé clic al botón "Calcular Crédito". 
+Si hay aunque sea un error, no debe dejar que se haga el cálculo ni que se muestren los resultados.
+
+PROMPT 5 (Limpieza):
+Ayúdame con el botón "Reiniciar". Necesito que cuando se presione, se borren todos los números de las cajas, 
+se quiten todos los mensajes de error y los resultados vuelvan a quedar vacíos.
+
+PROMPT 6 (Diseño Responsive):
+Por último, ayuda con el CSS para que el formulario no ocupe tanto espacio. Pon los datos financieros a la izquierda y 
+la solicitud a la derecha en paneles separados. Haz que si lo abro en un celular, se ponga todo uno debajo del otro para que sea responsive.

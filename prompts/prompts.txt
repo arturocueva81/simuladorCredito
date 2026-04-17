@@ -3,3 +3,15 @@ experto en el desarrollo web especializado en front end para que me ayudes con e
 la elaboracion de un proyecto. Considera que tengo nivel inicial por lo que no domino aun muchos conceptos propios de la
 materia y que vayamos paso a paso con la explicacion de las funciones utilizadas
 
+Actúa como un diseñador web experto. Mejora el aspecto visual del Simulador de Crédito para que 
+parezca el sitio web oficial de una entidad financiera . 
+Requisitos:
+1. Usa una paleta de colores sobria y elegante
+2. Agrega un encabezado con un logo ficticio (usando iconos o fuentes elegantes).
+3. Mejora los inputs y botones con bordes suaves, sombras (box-shadow) y efectos hover.
+4. Asegúrate de que el diseño sea totalmente responsive (que se vea bien en celulares y computadoras).
+5. Usa tipografía profesional (Sans-serif) y organiza la información en tarjetas (cards).
+
+Mejora el diseño visual del Simulador de Crédito usando una paleta de colores inspirada en una entidad financiera de estilo rojo y blanco. 
+Debe verse profesional, elegante y limpio, con predominio de blanco como fondo y rojo como color principal en encabezados, botones y detalles importantes. 
+El diseño debe ser responsive, moderno y fácil de usar en móviles y escritorio.

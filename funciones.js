@@ -1,8 +1,3 @@
-//AQUI TODA LA LOGICA DE LAS FUNCIONES DEL NEGOCIOfunction calcularDisponible(ingresos, egresos) {
-let monto;
-let tasa;
-let plazo;
-
 function calcularDisponible(ingresos, egresos) {
     let disponible = ingresos - egresos;
     if (disponible < 0) {
@@ -12,30 +7,22 @@ function calcularDisponible(ingresos, egresos) {
 }
 
 function calcularCapacidadPago(montoDisponible) {
-    let capacidad = montoDisponible * 0.5;
-    return capacidad;
+    return montoDisponible * 0.5;
 }
 
-function calcularInteresSimple(monto, tasa, plazo) {
-    let interes = plazo * monto * (tasa / 100);
-    return interes;
+function calcularInteresSimple(monto, tasa, plazoAnios) {
+    return plazoAnios * monto * (tasa / 100);
 }
 
 function calcularTotalPagar(monto, interes) {
-    let total = monto + interes + 100;
-    return total;
+    return monto + interes + 100;
 }
 
 function calcularCuotaMensual(total, plazoAnios) {
     let meses = plazoAnios * 12;
-    let cuota = total / meses;
-    return cuota;
+    return total / meses;
 }
 
 function aprobarCredito(capacidadPago, cuotaMensual) {
-    if (capacidadPago >= cuotaMensual) {
-        return true;
-    } else {
-        return false;
-    }
+    return capacidadPago >= cuotaMensual;
 }

@@ -7,63 +7,109 @@
     <link rel="stylesheet" href="simulador.css">
     <script src="funciones.js" defer></script>
     <script src="simulador.js" defer></script>
-
 </head>
 <body>
-    <div class="container">
-    <div class="header-banco">
-        <h1>Banco Futuro</h1>
-        <p>Simulador de Crédito Personal</p>
+    <div class="app-container">
+
+        <header class="panel header-panel">
+            <div class="bank-brand">
+                <div class="bank-logo">BF</div>
+                <div>
+                    <h1>Banco Futuro</h1>
+                    <p>Simulador de Crédito Personal</p>
+                </div>
+            </div>
+
+            <div class="bank-info">
+                <span>Evaluación rápida de crédito</span>
+            </div>
+        </header>
+
+        <main class="main-grid">
+            <section class="panel financial-panel">
+                <h2>Datos financieros</h2>
+
+                <div class="input-group">
+                    <label for="txtIngresos">Ingresos:</label>
+                    <input type="number" id="txtIngresos" class="no-spinner" min="0" step="0.01"
+                           placeholder="Ej: 1000" onblur="validarIngresos()">
+                    <small id="errIngresos" class="error"></small>
+                </div>
+
+                <div class="input-group">
+                    <label for="txtEgresos">Egresos:</label>
+                    <input type="number" id="txtEgresos" class="no-spinner" min="0" step="0.01"
+                           placeholder="Ej: 600" onblur="validarEgresos()">
+                    <small id="errEgresos" class="error"></small>
+                </div>
+
+                <div class="result-box compact">
+                    <div class="result-item">
+                        <span>Disponible:</span>
+                        <strong id="spnDisponible"></strong>
+                    </div>
+                    <div class="result-item">
+                        <span>Capacidad de pago mensual:</span>
+                        <strong id="spnCapacidadPago"></strong>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel credit-panel">
+                <h2>Solicitud de crédito</h2>
+
+                <div class="input-group">
+                    <label for="txtMonto">Monto:</label>
+                    <input type="number" id="txtMonto" class="no-spinner" min="0" step="0.01"
+                           placeholder="Ej: 2000" onblur="validarMonto()">
+                    <small id="errMonto" class="error"></small>
+                </div>
+
+                <div class="input-group">
+                    <label for="txtPlazo">Plazo en años:</label>
+                    <input type="number" id="txtPlazo" class="no-spinner" min="1" step="1"
+                           placeholder="Ej: 1" onblur="validarPlazo()">
+                    <small id="errPlazo" class="error"></small>
+                </div>
+
+                <div class="input-group">
+                    <label for="txtTasaInteres">Tasa de interés:</label>
+                    <input type="number" id="txtTasaInteres" class="no-spinner" min="0" step="0.01"
+                           placeholder="Ej: 10" onblur="validarTasa()">
+                    <small id="errTasaInteres" class="error"></small>
+                </div>
+
+                <div class="result-box">
+                    <div class="result-item">
+                        <span>Interés a pagar:</span>
+                        <strong id="spnInteresPagar"></strong>
+                    </div>
+                    <div class="result-item">
+                        <span>Total préstamo:</span>
+                        <strong id="spnTotalPrestamo"></strong>
+                    </div>
+                    <div class="result-item">
+                        <span>Cuota mensual:</span>
+                        <strong id="spnCuotaMensual"></strong>
+                    </div>
+                    <div class="result-item estado-row">
+                        <span>Estado del trámite:</span>
+                        <strong id="spnEstadoCredito">ANALIZANDO...</strong>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <section class="panel actions-panel">
+            <button id="btnCalcularCredito">Calcular Crédito</button>
+            <button id="btnReiniciar">Reiniciar</button>
+        </section>
+
+        <footer class="footer-panel">
+            <p>Powered by: <strong>Arturo Cueva</strong></p>
+            <p>Simulador de crédito personal · Versión responsive</p>
+        </footer>
+
     </div>
-
-    <h2>Datos financieros</h2>
-
-    <div class="input-group">
-        <label for="txtIngresos">Ingresos:</label>
-        <input type="number" id="txtIngresos" placeholder="Ej: 1000">
-    </div>
-
-    <div class="input-group">
-        <label for="txtEgresos">Egresos:</label>
-        <input type="number" id="txtEgresos" placeholder="Ej: 600">
-    </div>
-
-    <div class="result-box">
-        <div class="result-item">Disponible: <span id="spnDisponible"></span></div>
-        <div class="result-item">Capacidad de pago mensual: <span id="spnCapacidadPago"></span></div>
-    </div>
-
-    <h2>Solicitud de crédito</h2>
-
-    <div class="input-group">
-        <label for="txtMonto">Monto:</label>
-        <input type="number" id="txtMonto" placeholder="Ej: 2000">
-    </div>
-
-    <div class="input-group">
-        <label for="txtPlazo">Plazo en años:</label>
-        <input type="number" id="txtPlazo" placeholder="Ej: 1">
-    </div>
-
-    <div class="input-group">
-        <label for="txtTasaInteres">Tasa de interés:</label>
-        <input type="number" id="txtTasaInteres" placeholder="Ej: 10">
-    </div>
-
-    <div class="result-box">
-        <div class="result-item">Interés a pagar: <span id="spnInteresPagar"></span></div>
-        <div class="result-item">Total préstamo: <span id="spnTotalPrestamo"></span></div>
-        <div class="result-item">Cuota mensual: <span id="spnCuotaMensual"></span></div>
-    </div>
-
-    <p id="spnEstadoCredito">ANALIZANDO...</p>
-
-    <div class="buttons">
-        <button id="btnCalcularCredito">Calcular Crédito</button>
-        <button id="btnReiniciar">Reiniciar</button>
-    </div>
-</div>
-    
-
 </body>
 </html>

@@ -1,6 +1,8 @@
 function limpiarErrores() {
     document.getElementById("errIngresos").textContent = "";
-    document.getElementById("errEgresos").textContent = "";
+    document.getElementById("errArriendo").textContent = "";
+    document.getElementById("errAlimentacion").textContent = "";
+    document.getElementById("errVarios").textContent = "";
     document.getElementById("errMonto").textContent = "";
     document.getElementById("errPlazo").textContent = "";
     document.getElementById("errTasaInteres").textContent = "";
@@ -39,30 +41,81 @@ function validarIngresos() {
     return true;
 }
 
-function validarEgresos() {
-    let campo = document.getElementById("txtEgresos");
+function validarArriendo() {
+    let campo = document.getElementById("txtArriendo");
     let valor = campo.value.trim();
 
     if (valor === "") {
-        mostrarError("errEgresos", "Los egresos son obligatorios.");
+        mostrarError("errArriendo", "El arriendo es obligatorio.");
         return false;
     }
 
     let numero = parseFloat(valor);
 
     if (isNaN(numero)) {
-        mostrarError("errEgresos", "Ingrese un valor numérico válido.");
+        mostrarError("errArriendo", "Ingrese un valor numérico válido.");
         return false;
     }
 
     if (numero < 0) {
-        mostrarError("errEgresos", "Los egresos no pueden ser negativos.");
+        mostrarError("errArriendo", "El arriendo no puede ser negativo.");
         return false;
     }
 
-    limpiarError("errEgresos");
+    limpiarError("errArriendo");
     return true;
 }
+
+function validarAlimentacion() {
+    let campo = document.getElementById("txtAlimentacion");
+    let valor = campo.value.trim();
+
+    if (valor === "") {
+        mostrarError("errAlimentacion", "La alimentación es obligatoria.");
+        return false;
+    }
+
+    let numero = parseFloat(valor);
+
+    if (isNaN(numero)) {
+        mostrarError("errAlimentacion", "Ingrese un valor numérico válido.");
+        return false;
+    }
+
+    if (numero < 0) {
+        mostrarError("errAlimentacion", "La alimentación no puede ser negativa.");
+        return false;
+    }
+
+    limpiarError("errAlimentacion");
+    return true;
+}
+
+function validarVarios() {
+    let campo = document.getElementById("txtVarios");
+    let valor = campo.value.trim();
+
+    if (valor === "") {
+        mostrarError("errVarios", "Los gastos varios son obligatorios.");
+        return false;
+    }
+
+    let numero = parseFloat(valor);
+
+    if (isNaN(numero)) {
+        mostrarError("errVarios", "Ingrese un valor numérico válido.");
+        return false;
+    }
+
+    if (numero < 0) {
+        mostrarError("errVarios", "Los gastos varios no pueden ser negativos.");
+        return false;
+    }
+
+    limpiarError("errVarios");
+    return true;
+}
+
 
 function validarMonto() {
     let campo = document.getElementById("txtMonto");
@@ -151,26 +204,34 @@ function validarTasa() {
 
 function validarFormulario() {
     let okIngresos = validarIngresos();
-    let okEgresos = validarEgresos();
+    let okArriendo = validarArriendo();
+    let okAlimentacion = validarAlimentacion();
+    let okVarios = validarVarios();
     let okMonto = validarMonto();
     let okPlazo = validarPlazo();
     let okTasa = validarTasa();
 
-    return okIngresos && okEgresos && okMonto && okPlazo && okTasa;
+    return okIngresos && okArriendo && okAlimentacion && okVarios && okMonto && okPlazo && okTasa;
 }
 
 function calcular() {
+   
     if (!validarFormulario()) {
         return;
     }
 
-    let ingresos = parseFloat(document.getElementById("txtIngresos").value);
-    let egresos = parseFloat(document.getElementById("txtEgresos").value);
-    let monto = parseFloat(document.getElementById("txtMonto").value);
-    let plazo = parseInt(document.getElementById("txtPlazo").value);
-    let tasa = parseFloat(document.getElementById("txtTasaInteres").value);
+    let ingresos = parseFloat(document.getElementById("txtIngresos").value) || 0;
+    let arriendo = parseFloat(document.getElementById("txtArriendo").value) || 0;
+    let alimentacion = parseFloat(document.getElementById("txtAlimentacion").value) || 0;
+    let varios = parseFloat(document.getElementById("txtVarios").value) || 0;
+    let monto = parseFloat(document.getElementById("txtMonto").value) || 0;
+    let plazo = parseInt(document.getElementById("txtPlazo").value) || 0;
+    let tasa = parseFloat(document.getElementById("txtTasaInteres").value) || 0;
 
-    let disponible = calcularDisponible(ingresos, egresos);
+    let totalGastos = arriendo + alimentacion + varios;
+    document.getElementById("spnTotalGastos").textContent = "USD " + totalGastos.toFixed(2);
+
+    let disponible = calcularDisponible(ingresos, arriendo, alimentacion, varios);
     document.getElementById("spnDisponible").textContent = "USD " + disponible.toFixed(2);
 
     let capacidad = calcularCapacidadPago(disponible);
@@ -199,7 +260,9 @@ function calcular() {
 
 function reiniciar() {
     document.getElementById("txtIngresos").value = "";
-    document.getElementById("txtEgresos").value = "";
+    document.getElementById("txtArriendo").value = "";
+    document.getElementById("txtAlimentacion").value = "";
+    document.getElementById("txtVarios").value = "";
     document.getElementById("txtMonto").value = "";
     document.getElementById("txtPlazo").value = "";
     document.getElementById("txtTasaInteres").value = "";
@@ -209,6 +272,7 @@ function reiniciar() {
     document.getElementById("spnInteresPagar").textContent = "";
     document.getElementById("spnTotalPrestamo").textContent = "";
     document.getElementById("spnCuotaMensual").textContent = "";
+    document.getElementById("spnTotalGastos").textContent = "";
 
     let componenteEstado = document.getElementById("spnEstadoCredito");
     componenteEstado.textContent = "ANALIZANDO...";
@@ -219,7 +283,9 @@ function reiniciar() {
 
 function iniciarValidacionesEnBlur() {
     document.getElementById("txtIngresos").addEventListener("blur", validarIngresos);
-    document.getElementById("txtEgresos").addEventListener("blur", validarEgresos);
+    document.getElementById("txtArriendo").addEventListener("blur", validarArriendo);
+    document.getElementById("txtAlimentacion").addEventListener("blur", validarAlimentacion);
+    document.getElementById("txtVarios").addEventListener("blur", validarVarios);
     document.getElementById("txtMonto").addEventListener("blur", validarMonto);
     document.getElementById("txtPlazo").addEventListener("blur", validarPlazo);
     document.getElementById("txtTasaInteres").addEventListener("blur", validarTasa);

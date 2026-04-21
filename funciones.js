@@ -1,4 +1,5 @@
-function calcularDisponible(ingresos, egresos) {
+function calcularDisponible(ingresos, arriendo, alimentacion, varios) {
+    let egresos = arriendo + alimentacion + varios;
     let disponible = ingresos - egresos;
     if (disponible < 0) {
         return 0;
